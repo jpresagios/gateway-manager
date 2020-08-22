@@ -19,7 +19,11 @@ export default class GateWayValidator extends Validator implements IValidator {
   isUnique = async (value: string): Promise<boolean> => {
     const result = await this.gateWayRepository.getGateWayBySerialNumber(value);
 
-    return result.length === 0;
+    if (result) {
+      return result.length === 0;
+    }
+
+    return true;
   };
 
   /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
