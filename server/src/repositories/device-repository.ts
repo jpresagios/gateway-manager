@@ -14,21 +14,15 @@ export default class DeviceRepository implements IDeviceRepository {
    * idGateWay: Id of the Gateway
    * deviceData: Data of the device to added
    */
-  async addDevice(idGateWay, deviceData: IDevice): Promise<any> {
-    try {
-      const device: IDevice = new Device(deviceData);
-      const resultDeviceDB = await device.save();
+  async addDevice(idGateWay, deviceData): Promise<any> {
+    const device: IDevice = new Device(deviceData);
+    const resultDeviceDB = await device.save();
 
-      const gateWay = await GateWay.findById(idGateWay);
-      gateWay.devices.push(resultDeviceDB);
-      gateWay.save();
+    const gateWay = await GateWay.findById(idGateWay);
+    gateWay.devices.push(resultDeviceDB);
+    gateWay.save();
 
-      logger.info("Device successfully added to gateway ", idGateWay);
-
-      return resultDeviceDB;
-    } catch (error) {
-      logger.error("Fails to added device to gateway", idGateWay);
-    }
+    return resultDeviceDB;
   }
 
   /*
@@ -37,15 +31,9 @@ export default class DeviceRepository implements IDeviceRepository {
    * idDevice: Id of device to remove
    */
   async removeDevice(idDevice): Promise<any> {
-    try {
-      const device = await Device.findById(idDevice);
-      const result = await device.remove();
+    const device = await Device.findById(idDevice);
+    const result = await device.remove();
 
-      logger.info("Device successfully remove");
-
-      return result;
-    } catch (error) {
-      logger.error("Fails to remove device", error);
-    }
+    return result;
   }
 }

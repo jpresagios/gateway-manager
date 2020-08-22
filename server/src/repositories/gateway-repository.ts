@@ -13,31 +13,23 @@ export default class GateWayRepository implements IGateWayRepository {
    * gateWayData: Data of the gateway to insert
    */
   async insertGateWay(gateWayData): Promise<any> {
-    try {
-      const gateWay: IGateWay = new GateWay(gateWayData);
-      const resulteFromDB = await gateWay.save();
+    const gateWay: IGateWay = new GateWay(gateWayData);
+    const resulteFromDB = await gateWay.save();
 
-      logger.info("GateWay successfully inserted");
+    logger.info("GateWay successfully inserted");
 
-      return resulteFromDB;
-    } catch (error) {
-      logger.error("Fails to insert gateway", error);
-    }
+    return resulteFromDB;
   }
 
   /*
    * Retrieved all gateways
    */
   async allGateWay(): Promise<any> {
-    try {
-      const allGateWay = await GateWay.find().populate("devices");
+    const allGateWay = await GateWay.find().populate("devices");
 
-      logger.info("Retrieve all gateWays");
+    logger.info("Retrieve all gateWays");
 
-      return allGateWay;
-    } catch (error) {
-      logger.error("Fails to retrieved gateways", error);
-    }
+    return allGateWay;
   }
 
   /*
@@ -46,14 +38,10 @@ export default class GateWayRepository implements IGateWayRepository {
    * idGateWay: id of the gateway to get detail
    */
   async detailGateWay(idGateWay): Promise<any> {
-    try {
-      const gateWay = await GateWay.findById(idGateWay).populate("devices");
+    const gateWay = await GateWay.findById(idGateWay).populate("devices");
 
-      logger.info("Retrieved detail gateway");
+    logger.info("Retrieved detail gateway");
 
-      return gateWay;
-    } catch (error) {
-      logger.error("Fails to retrieve detail gateway", error);
-    }
+    return gateWay;
   }
 }
