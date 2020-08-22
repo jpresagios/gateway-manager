@@ -3,6 +3,8 @@ import { Application } from "express";
 import IControllerBase from "./interfaces/icontroller-base-interface";
 import logger from "./services/logger-service";
 import IDatabase from "./interfaces/idatabase-interface";
+import * as swaggerUi from "swagger-ui-express";
+import * as swaggerDocument from "./api-doc/swagger.json";
 
 import * as http from "http";
 
@@ -43,6 +45,30 @@ class App {
     controllers.forEach((controller) => {
       this.app.use(controller.getPrefixRoute(), controller.getRouter());
     });
+
+    const DisableTryItOutPlugin = function () {
+      return {
+        statePlugins: {
+          spec: {
+            wrapSelectors: {
+              allowTryItOutFor: () => () => false,
+            },
+          },
+        },
+      };
+    };
+
+    const options = {
+      swaggerOptions: {
+        plugins: [DisableTryItOutPlugin],
+      },
+    };
+
+    this.app.use(
+      "/api-docs",
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerDocument, options)
+    );
   }
 
   public listen(): void {
