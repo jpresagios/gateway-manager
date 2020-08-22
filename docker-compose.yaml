@@ -1,0 +1,30 @@
+version: "3"
+services:
+  client_service:
+    build: ./client
+    container_name: client_service
+    ports:
+      - "3001:80"
+    environment:
+      - REACT_APP_URL=https://gateway_service:8080/
+
+    depends_on:
+      - gateway_service
+
+  gateway_service:
+    build: ./server
+    container_name: gateway_service
+    ports:
+      - "3000:3000"
+    environment:
+      - HOST=0.0.0.0:3000
+      - SERVER_PORT=3000
+      - HOST_DATABASE_URL=mongodb://mongodb:27017/sports-db
+
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27018:27017"
