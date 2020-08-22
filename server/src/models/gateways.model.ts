@@ -1,5 +1,6 @@
 import { Schema, model, Document } from "mongoose";
 import { IDevice } from "../models/device.model";
+import Device from "../models/device.model";
 
 export interface IGateWay extends Document {
   serialNumber: {
@@ -30,7 +31,7 @@ const GateWaySchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  devices: [{ type: Schema.Types.ObjectId, ref: "Device" }],
+  devices: [{ type: Schema.Types.ObjectId, ref: Device }],
 });
 
 export default model<IGateWay>("GateWay", GateWaySchema);
