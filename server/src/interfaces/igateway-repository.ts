@@ -7,6 +7,9 @@ interface IGateWayRepository {
 
   // Retrieve all Gateway
   allGateWay();
+
+  // GateWay by serie number
+  getGateWayBySerialNumber(serialNumber);
 }
 
 export default IGateWayRepository;
