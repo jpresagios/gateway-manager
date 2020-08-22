@@ -10,7 +10,7 @@ export interface IGateWay extends Document {
     type: string;
     required: true;
   };
-  IpV4: {
+  ipV4: {
     type: string;
     required: true;
   };
@@ -26,7 +26,7 @@ const GateWaySchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  IpV4: {
+  ipV4: {
     type: String,
     required: true,
   },
