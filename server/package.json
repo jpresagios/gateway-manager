@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "loadash": "^1.0.0",
     "mongoose": "^5.10.0",
+    "reflect-metadata": "^0.1.13",
     "typescript": "^3.9.5",
     "winston": "^3.3.3"
   },
