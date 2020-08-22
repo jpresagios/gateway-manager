@@ -16,6 +16,8 @@ import DeviceController from "./controllers/device-controller";
 //Validators
 import GateWayValidator from "./validations/gateway-validator";
 
+import DeviceValidator from "./validations/device-validator";
+
 const DIContainer = new Container();
 
 //Controllers
@@ -34,5 +36,7 @@ DIContainer.bind<IDeviceRepository>(TYPES.DeviceRepository).to(
 
 //Validators
 DIContainer.bind<GateWayValidator>(TYPES.GateWayValidator).to(GateWayValidator);
+
+DIContainer.bind<DeviceValidator>(TYPES.DeviceValidator).to(DeviceValidator);
 
 export default DIContainer;
