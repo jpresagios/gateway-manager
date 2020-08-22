@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import IControllerBase from "../interfaces/icontroller-base-interface";
 import IDeviceRepository from "../interfaces/idevice-repository";
+import IValidator from "../interfaces/validators/ivalidator-interface";
 import logger from "../services/logger-service";
 import { TYPES } from "../types/types";
 import "reflect-metadata";
@@ -11,12 +12,16 @@ export default class DeviceController implements IControllerBase {
   private prefix = "/device/";
   private router: Router = Router();
   private deviceRepository: IDeviceRepository;
+  private deviceValidator: IValidator;
 
   constructor(
     @inject(TYPES.DeviceRepository)
-    deviceRepository: IDeviceRepository
+    deviceRepository: IDeviceRepository,
+    @inject(TYPES.DeviceValidator)
+    deviceValidator: IValidator
   ) {
     this.deviceRepository = deviceRepository;
+    this.deviceValidator = deviceValidator;
 
     this.initRoutes();
   }
@@ -41,15 +46,27 @@ export default class DeviceController implements IControllerBase {
     try {
       logger.info("Executing add device", req.body);
 
-      const deviceResult = await this.deviceRepository.addDevice(
+      const { errors, isValid } = await this.deviceValidator.validate({
         idGateWay,
-        rest
-      );
-
-      return res.status(200).json({
-        data: deviceResult,
-        success: true,
+        ...rest,
       });
+
+      if (isValid) {
+        const deviceResult = await this.deviceRepository.addDevice(
+          idGateWay,
+          rest
+        );
+
+        return res.status(200).json({
+          data: deviceResult,
+          success: true,
+        });
+      } else {
+        return res.status(400).json({
+          data: errors,
+          success: true,
+        });
+      }
     } catch (error) {
       logger.error("Fail to insert Device  ", error);
 
