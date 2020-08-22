@@ -1,0 +1,202 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "GateWay API",
+    "description": "Service to Gateway manager"
+  },
+  "schemes": ["http"],
+  "basePath": "/",
+  "tryItOut": false,
+  "paths": {
+    "/gatewall/all": {
+      "get": {
+        "summary": "Retrieve all Gateway",
+
+        "responses": {
+          "200": {
+            "description": "Get all Gateways data. devices field expand to all devices data associated with a gateway",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "_id": {
+                    "type": "string"
+                  },
+                  "serialNumber": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "IpV4": {
+                    "type": "string"
+                  },
+                  "devices": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gateway/insert": {
+      "post": {
+        "summary": "GateWay Insert",
+        "description": "Take gateway according to specifications and inserted it",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "required": ["serialNumber", "name", "IpV4"],
+
+              "properties": {
+                "serialNumber": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "IpV4": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success contain result of the operation. data contain GateWay data inserted in case sucessfully operation",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/gateway/detail/:id": {
+      "get": {
+        "summary": "GateWay Detail",
+        "description": "Retrieve gateway detail",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return the detail gateway",
+            "schema": {
+              "properties": {
+                "serialNumber": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "IpV4": {
+                  "type": "string"
+                },
+                "devices": {
+                  "type": "object",
+                  "description": "Array with device data"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/device/add": {
+      "post": {
+        "summary": "Added a new device",
+        "description": "device is a object contain uid, vendor and status",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "required": ["idGateWay", "device"],
+
+              "properties": {
+                "idGateWay": {
+                  "type": "string"
+                },
+                "device": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success contain result of the operation, true in case successfully operation, false otherwise. data contain Device inserted in case sucessfully operation",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/device/remove/:id": {
+      "delete": {
+        "summary": "Remove a device. Success field contain the result of the operation",
+        "description": "Remove a device",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return the device removed",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "uid": {
+                  "type": "string"
+                },
+                "vendor": {
+                  "type": "string"
+                },
+                "createAt": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
