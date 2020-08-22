@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { ListGroup, ListGroupItem } from "reactstrap";
 import DeviceItem from "./DeviceItem";
 
 const DeviceList = (props) => {
-  const { devices } = props;
+  const { devices, onDelete } = props;
 
   return (
     <ListGroup>
-      {devices.map((device) => {
-        return (
-          <ListGroupItem>
-            <DeviceItem device={device} />
-          </ListGroupItem>
-        );
-      })}
+      {devices &&
+        devices.map((device) => {
+          return (
+            <ListGroupItem>
+              <DeviceItem device={device} onDelete={(e) => onDelete(e)} />
+            </ListGroupItem>
+          );
+        })}
     </ListGroup>
   );
 };
