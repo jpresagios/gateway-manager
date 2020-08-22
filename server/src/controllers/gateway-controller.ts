@@ -5,6 +5,7 @@ import logger from "../services/logger-service";
 import { TYPES } from "../types/types";
 import "reflect-metadata";
 import { inject, injectable } from "inversify";
+import validateGateWay from "../validations/gateway-validator";
 
 @injectable()
 export default class GateWayController implements IControllerBase {
@@ -43,15 +44,24 @@ export default class GateWayController implements IControllerBase {
     try {
       logger.info("Executing insert for gateWay", gateWayData);
 
-      const gateWayResult = await this.gateWayRepository.insertGateWay(
-        gateWayData
-      );
+      const { errors, isValid } = validateGateWay(gateWayData);
 
-      return res.status(200).json({
-        status: 200,
-        data: gateWayResult,
-        success: 34,
-      });
+      if (isValid) {
+        const gateWayResult = await this.gateWayRepository.insertGateWay(
+          gateWayData
+        );
+
+        return res.status(200).json({
+          errors: errors,
+          data: gateWayResult,
+          success: true,
+        });
+      } else {
+        return res.status(400).json({
+          data: errors,
+          success: false,
+        });
+      }
     } catch (error) {
       logger.error("Fail to insert GateWay  ", error);
 
@@ -68,7 +78,6 @@ export default class GateWayController implements IControllerBase {
       const gateWayResult = await this.gateWayRepository.allGateWay();
 
       return res.status(200).json({
-        status: 200,
         data: gateWayResult,
         success: true,
       });
@@ -76,7 +85,6 @@ export default class GateWayController implements IControllerBase {
       logger.error("Fail to insert GateWay  ", error);
 
       return res.status(500).json({
-        status: 500,
         success: false,
       });
     }
@@ -89,7 +97,6 @@ export default class GateWayController implements IControllerBase {
       const gateWayResult = await this.gateWayRepository.detailGateWay(id);
 
       return res.status(200).json({
-        status: 200,
         data: gateWayResult,
         success: true,
       });
@@ -97,7 +104,6 @@ export default class GateWayController implements IControllerBase {
       logger.error("Fail to get details for GateWay", error);
 
       return res.status(500).json({
-        status: 500,
         success: false,
       });
     }
