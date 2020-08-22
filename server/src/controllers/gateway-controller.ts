@@ -41,9 +41,9 @@ export default class GateWayController implements IControllerBase {
   insertGateWay = async (req: Request, res: Response): Promise<Response> => {
     const gateWayData = req.body;
 
-    try {
-      logger.info("Executing insert for gateWay", gateWayData);
+    logger.info("Executing insert for gateWay", gateWayData);
 
+    try {
       const { errors, isValid } = validateGateWay(gateWayData);
 
       if (isValid) {
@@ -57,8 +57,10 @@ export default class GateWayController implements IControllerBase {
           success: true,
         });
       } else {
+        logger.error("Error executing insert for gateWay", gateWayData);
+
         return res.status(400).json({
-          data: errors,
+          errors,
           success: false,
         });
       }
