@@ -53,4 +53,22 @@ describe("GateWay Repository", () => {
 
     expect(countGateWays.length).toEqual(gateWayData.length);
   }, 9000);
+
+  test("Validate method detailGateWay return correct Data", async () => {
+    const gateWayRepository = new GateWayRepository();
+
+    const result = await gateWayRepository.insertGateWay(gateWayData[0]);
+
+    const resultFromDB = await gateWayRepository.detailGateWay(result._id);
+
+    const { _id, serialNumber, name, ipV4 } = resultFromDB;
+
+    expect(_id).toEqual(result._id);
+
+    expect(serialNumber).toEqual(serialNumber);
+
+    expect(name).toEqual(name);
+
+    expect(ipV4).toEqual(ipV4);
+  }, 9000);
 });
