@@ -1,0 +1,3 @@
+HOST=localhost
+SERVER_PORT=3000
+HOST_DATABASE_URL=mongodb://localhost:32017/gateway-db
