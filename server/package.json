@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "loadash": "^1.0.0",
     "mongoose": "^5.10.0",
     "typescript": "^3.9.5"
   },
