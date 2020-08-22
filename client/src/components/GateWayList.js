@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Collapse, CardBody, Card, CardHeader, Button } from "reactstrap";
 import { gateWayList } from "../api/gateway";
 import DeviceList from "./Device/DeviceList";
+import { Link } from "react-router-dom";
 
 class GateWayList extends Component {
   constructor(props) {
@@ -31,8 +32,11 @@ class GateWayList extends Component {
 
     console.log(gateways);
     return (
-      <div className="container">
-        <h3 className="page-header">List gateways</h3>
+      <>
+        <Link to="/gateway/add" className="btn btn-primary mb-3">
+          Create GateWay
+        </Link>
+
         {gateways.map((gateway, index) => {
           return (
             <Card style={{ marginBottom: "1rem" }} key={index}>
@@ -47,7 +51,7 @@ class GateWayList extends Component {
             </Card>
           );
         })}
-      </div>
+      </>
     );
   }
 }
