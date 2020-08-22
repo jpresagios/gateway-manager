@@ -4,7 +4,7 @@ import { ListGroup, ListGroupItem } from "reactstrap";
 import DeviceItem from "./DeviceItem";
 
 const DeviceList = (props) => {
-  const { devices, onDelete } = props;
+  const { devices, onDelete, showDelete } = props;
 
   return (
     <ListGroup>
@@ -12,7 +12,11 @@ const DeviceList = (props) => {
         devices.map((device) => {
           return (
             <ListGroupItem>
-              <DeviceItem device={device} onDelete={(e) => onDelete(e)} />
+              <DeviceItem
+                showDelete={showDelete}
+                device={device}
+                onDelete={(e) => onDelete(e)}
+              />
             </ListGroupItem>
           );
         })}
