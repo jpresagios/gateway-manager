@@ -4,7 +4,9 @@
   "description": "gateway manager API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node src/index.ts",
+    "develop": "nodemon",
+    "eslint": "eslint . --ext .ts"
   },
   "keywords": [
     "Javascript",
