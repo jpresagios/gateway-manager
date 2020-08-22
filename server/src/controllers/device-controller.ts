@@ -47,7 +47,6 @@ export default class DeviceController implements IControllerBase {
       );
 
       return res.status(200).json({
-        status: 200,
         data: deviceResult,
         success: true,
       });
@@ -55,7 +54,6 @@ export default class DeviceController implements IControllerBase {
       logger.error("Fail to insert Device  ", error);
 
       return res.status(500).json({
-        status: 500,
         success: false,
       });
     }
