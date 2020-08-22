@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "develop": "nodemon",
-    "eslint": "eslint . --ext .ts"
+    "eslint": "eslint . --ext .ts",
+    "test": "jest"
   },
   "keywords": [
     "Javascript",
