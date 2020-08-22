@@ -65,10 +65,30 @@ describe("GateWay Repository", () => {
 
     expect(_id).toEqual(result._id);
 
-    expect(serialNumber).toEqual(serialNumber);
+    expect(serialNumber).toEqual(result.serialNumber);
 
-    expect(name).toEqual(name);
+    expect(name).toEqual(result.name);
 
-    expect(ipV4).toEqual(ipV4);
+    expect(ipV4).toEqual(result.ipV4);
+  }, 9000);
+
+  test("Validate method getGateWayBySerialNumber return correct Data", async () => {
+    const gateWayRepository = new GateWayRepository();
+
+    const result = await gateWayRepository.insertGateWay(gateWayData[0]);
+
+    const resultFromDB = await gateWayRepository.getGateWayBySerialNumber(
+      result.serialNumber
+    );
+
+    const { _id, serialNumber, name, ipV4 } = resultFromDB;
+
+    expect(_id).toEqual(result._id);
+
+    expect(serialNumber).toEqual(result.serialNumber);
+
+    expect(name).toEqual(result.name);
+
+    expect(ipV4).toEqual(result.ipV4);
   }, 9000);
 });
