@@ -1,23 +1,27 @@
 import { Request, Response, Router } from "express";
 import IControllerBase from "../interfaces/icontroller-base-interface";
 import IGateWayRepository from "../interfaces/igateway-repository";
+import IValidator from "../interfaces/validators/ivalidator-interface";
 import logger from "../services/logger-service";
 import { TYPES } from "../types/types";
 import "reflect-metadata";
 import { inject, injectable } from "inversify";
-import validateGateWay from "../validations/gateway-validator";
 
 @injectable()
 export default class GateWayController implements IControllerBase {
   private prefix = "/gateway/";
   private router: Router = Router();
   private gateWayRepository: IGateWayRepository;
+  private gateWayValidator: IValidator;
 
   constructor(
     @inject(TYPES.GateWayRepository)
-    gateWayRepository: IGateWayRepository
+    gateWayRepository: IGateWayRepository,
+    @inject(TYPES.GateWayValidator)
+    gateWayValidator: IValidator
   ) {
     this.gateWayRepository = gateWayRepository;
+    this.gateWayValidator = gateWayValidator;
 
     this.initRoutes();
   }
@@ -44,7 +48,9 @@ export default class GateWayController implements IControllerBase {
     logger.info("Executing insert for gateWay", gateWayData);
 
     try {
-      const { errors, isValid } = validateGateWay(gateWayData);
+      const { errors, isValid } = await this.gateWayValidator.validate(
+        gateWayData
+      );
 
       if (isValid) {
         const gateWayResult = await this.gateWayRepository.insertGateWay(
@@ -52,12 +58,11 @@ export default class GateWayController implements IControllerBase {
         );
 
         return res.status(200).json({
-          errors: errors,
           data: gateWayResult,
           success: true,
         });
       } else {
-        logger.error("Error executing insert for gateWay", gateWayData);
+        logger.error("Error executing insert for gateWay", errors);
 
         return res.status(400).json({
           errors,
