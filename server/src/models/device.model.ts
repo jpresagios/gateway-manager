@@ -31,7 +31,6 @@ const DeviceSchema: Schema = new Schema({
 
   vendor: {
     type: String,
-    required: true,
   },
 
   createAt: {
