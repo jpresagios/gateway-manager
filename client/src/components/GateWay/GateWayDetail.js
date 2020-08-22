@@ -64,6 +64,7 @@ const GateWayDetail = (props) => {
           <DeviceList
             devices={gateway.devices}
             key={gateway._id}
+            showDelete={true}
             onDelete={(idDevice) => handleDelete(idDevice)}
           />
         </CardBody>
