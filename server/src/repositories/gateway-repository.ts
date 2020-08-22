@@ -44,4 +44,10 @@ export default class GateWayRepository implements IGateWayRepository {
 
     return gateWay;
   }
+
+  async getGateWayBySerialNumber(serialNumber): Promise<any> {
+    const gateWay = await GateWay.find({ serialNumber });
+
+    return gateWay;
+  }
 }
