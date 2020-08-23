@@ -9,10 +9,8 @@ import {
   closeDatabase,
 } from "./mongodb-test-enviroment";
 
-import GateWay from "../src/models/gateways.model";
 import GateWayRepository from "../src/repositories/gateway-repository";
 import DeviceRepository from "../src/repositories/device-repository";
-import { formatWithOptions } from "util";
 
 let deviceValidator: DeviceValidator;
 const gateWayRepository = new GateWayRepository();
