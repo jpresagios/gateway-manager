@@ -20,9 +20,11 @@ export default class DeviceValidator extends Validator implements IValidator {
   validate = async (data) => {
     const { uid, status, idGateWay } = data;
 
-    const numberDevice = await this.gateWayRepository.getNumberDevice(
-      idGateWay
-    );
+    let numberDevice = 0;
+
+    if (idGateWay) {
+      numberDevice = await this.gateWayRepository.getNumberDevice(idGateWay);
+    }
 
     const errors = {};
 
