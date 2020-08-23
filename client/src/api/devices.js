@@ -11,12 +11,7 @@ function deleteDevice(idDevice) {
 }
 
 function createDevice(deviceData) {
-  return axios
-    .post(`${env.REACT_APP_URL}/device/add`, deviceData)
-    .then((res) => {
-      const { data } = res;
-      return data;
-    });
+  return axios.post(`${env.REACT_APP_URL}/device/add`, deviceData);
 }
 
 export { deleteDevice, createDevice };
