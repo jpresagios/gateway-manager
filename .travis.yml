@@ -16,4 +16,4 @@ after_success:
   - docker build -t juniorpazformoso/client ./client
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" — password-stdin
   - docker push juniorpazformoso/client
-  - docker push juniorpazformoso/server
+  - docker push juniorpazformoso/gateway-server
