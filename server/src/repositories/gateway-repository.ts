@@ -62,6 +62,10 @@ export default class GateWayRepository implements IGateWayRepository {
   async getNumberDevice(idGateWay): Promise<any> {
     const gateWay = await GateWay.findById(idGateWay);
 
-    return gateWay.devices.length;
+    if (gateWay) {
+      return gateWay.devices.length;
+    }
+
+    return 0;
   }
 }
