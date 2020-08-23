@@ -24,9 +24,6 @@ beforeAll(async () => {
 // Clear all test data after every test to have insolation database conditions
 afterEach(async () => await clearDatabase());
 
-// Finished to in-memory and closed resource
-afterAll(async () => await closeDatabase());
-
 describe("Device Validator", () => {
   test("Validate the validator returned true when the data is correct", async () => {
     const result = await deviceValidator.validate(deviceData[0]);
