@@ -1,12 +1,17 @@
 version: "3"
 services:
+  mongodb:
+    image: mongo
+    ports:
+      - "27018:27017"
+
   client_service:
     build: ./client
     container_name: client_service
     ports:
       - "3001:80"
     environment:
-      - REACT_APP_URL=https://gateway_service:8080/
+      - REACT_APP_URL=https://gateway_service:3000/
 
     depends_on:
       - gateway_service
@@ -23,8 +28,3 @@ services:
 
     depends_on:
       - mongodb
-
-  mongodb:
-    image: mongo
-    ports:
-      - "27018:27017"

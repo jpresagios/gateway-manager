@@ -13,5 +13,4 @@ COPY . .
 #Expose port and start application
 EXPOSE 3000
 
-
-CMD [ "npm", "run", "start" ]
+CMD ["npm", "run", "fixtures-start"]
