@@ -10,6 +10,9 @@ interface IGateWayRepository {
 
   // GateWay by serie number
   getGateWayBySerialNumber(serialNumber);
+
+  // Number of devices associated to a gateway
+  getNumberDevice(idGateWay);
 }
 
 export default IGateWayRepository;
