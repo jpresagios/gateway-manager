@@ -7,13 +7,13 @@ services:
   - docker
 
 before_install:
-  - docker build -t juniorpazformoso/gateway-server -f ./server/Dockerfile ./server
+  - docker build -t $DOCKER_ID/gateway-server -f ./server/Dockerfile ./server
 
-# script:
-#   - docker run -e CI=true juniorpazformoso/gateway-server npm run test
+script:
+  - docker run -e CI=true $DOCKER_ID/gateway-server npm run test base-validator.test
 
 after_success:
-  - docker build -t juniorpazformoso/client ./client
+  - docker build -t "$DOCKER_ID"/client ./client
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" — password-stdin
-  - docker push juniorpazformoso/client
-  - docker push juniorpazformoso/server
+  - docker push $DOCKER_ID/client
+  - docker push $DOCKER_ID/server
