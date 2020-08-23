@@ -1,5 +1,4 @@
-# stage1 as builder
-FROM node:10-alpine as builder
+FROM node:latest as builder
 
 # copy the package.json to install dependencies
 COPY package.json package-lock.json ./
@@ -15,7 +14,7 @@ COPY . .
 RUN npm run build
 
 
-FROM nginx:alpine
+FROM nginx:latest
 
 #!/bin/sh
 
