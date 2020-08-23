@@ -90,7 +90,7 @@ export default class DeviceController implements IControllerBase {
         data: deviceResult,
       });
     } catch (error) {
-      logger.error("Fail to insert Device  ", error);
+      logger.error("Fail to remove Device  ", error);
 
       return res.status(500).json({
         status: 500,
