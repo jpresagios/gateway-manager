@@ -7,7 +7,7 @@
     "start": "ts-node src/index.ts",
     "develop": "nodemon",
     "eslint": "eslint . --ext .ts",
-    "test": "jest",
+    "test": "jest --forceExit --detectOpenHandles",
     "fixtures": "ts-node ./src/fixture-data.ts",
     "fixtures-start": "npm run fixtures && npm run start"
   },
