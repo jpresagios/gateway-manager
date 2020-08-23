@@ -62,15 +62,15 @@ export default class DeviceController implements IControllerBase {
           success: true,
         });
       } else {
-        logger.error("Error executing insert for device", errors);
+        logger.info("Error executing insert for device", errors);
 
         return res.status(400).json({
-          data: errors,
-          success: true,
+          errors,
+          success: false,
         });
       }
     } catch (error) {
-      logger.error("Fail to insert Device  ", error);
+      logger.info("Fail to insert Device  ", error);
 
       return res.status(500).json({
         success: false,
