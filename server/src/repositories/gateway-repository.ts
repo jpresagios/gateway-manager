@@ -33,7 +33,7 @@ export default class GateWayRepository implements IGateWayRepository {
   }
 
   /*
-   * Delete a gatewaut
+   * Detail for gateway
    *
    * idGateWay: id of the gateway to get detail
    */
@@ -45,9 +45,23 @@ export default class GateWayRepository implements IGateWayRepository {
     return gateWay;
   }
 
+  /*
+   * Detail for gateway using serialNumber to filter
+   *
+   */
   async getGateWayBySerialNumber(serialNumber): Promise<any> {
     const gateWay = await GateWay.findOne({ serialNumber });
 
     return gateWay;
+  }
+
+  /*
+   * Return number of devices associated to a GateWay
+   *
+   */
+  async getNumberDevice(idGateWay): Promise<any> {
+    const gateWay = await GateWay.findById(idGateWay);
+
+    return gateWay.devices.length;
   }
 }
