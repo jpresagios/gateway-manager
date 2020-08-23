@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Button, Alert } from "reactstrap";
 import { createGateWay } from "../../api/gateway";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 
@@ -7,6 +7,10 @@ const GateWayForm = (props) => {
   const [serialNumber, setSerialNumber] = useState("");
   const [name, setName] = useState("");
   const [ipV4, setIpV4] = useState("");
+  const [
+    validationUniqueSerialNumber,
+    setValidationUniqueSerialNumber,
+  ] = useState("");
 
   const onSubmit = (e) => {
     const newGateWay = {
@@ -15,16 +19,32 @@ const GateWayForm = (props) => {
       ipV4,
     };
 
-    createGateWay(newGateWay).then((_) => {
-      props.history.push("/");
-    });
+    createGateWay(newGateWay)
+      .then((_) => {
+        props.history.push("/");
+      })
+      .catch((error) => {
+        if (error.response.status === 400 && serialNumber) {
+          const {
+            data: {
+              errors: { serialNumber },
+            },
+          } = error.response;
+
+          setValidationUniqueSerialNumber(serialNumber);
+        }
+      });
   };
 
   return (
     <AvForm onSubmit={onSubmit}>
       <h1 className="mb-4">Create Gateway</h1>
+
+      {validationUniqueSerialNumber && (
+        <Alert color="danger">{validationUniqueSerialNumber}</Alert>
+      )}
       <AvField
-        name="name"
+        name="serialNumber"
         value={serialNumber}
         onChange={(e) => setSerialNumber(e.target.value)}
         label="Serial Number"
