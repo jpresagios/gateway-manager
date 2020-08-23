@@ -28,7 +28,7 @@ describe("GateWay Repository", () => {
     const countGateWays: number = await GateWay.count({});
 
     expect(countGateWays).toEqual(gateWayData.length);
-  }, 9000);
+  });
 
   test("Method allGateWay successfully retrieved all GateWays", async () => {
     const gateWayRepository = new GateWayRepository();
@@ -40,7 +40,7 @@ describe("GateWay Repository", () => {
     const countGateWays = await gateWayRepository.allGateWay();
 
     expect(countGateWays.length).toEqual(gateWayData.length);
-  }, 9000);
+  });
 
   test("Compare allGateWay result with all GateWay inserted using deep comparation (field by field)", async () => {
     const gateWayRepository = new GateWayRepository();
@@ -52,7 +52,7 @@ describe("GateWay Repository", () => {
     const countGateWays = await gateWayRepository.allGateWay();
 
     expect(countGateWays.length).toEqual(gateWayData.length);
-  }, 9000);
+  });
 
   test("Validate method detailGateWay return correct Data", async () => {
     const gateWayRepository = new GateWayRepository();
@@ -70,7 +70,7 @@ describe("GateWay Repository", () => {
     expect(name).toEqual(result.name);
 
     expect(ipV4).toEqual(result.ipV4);
-  }, 9000);
+  });
 
   test("Validate method getGateWayBySerialNumber return correct Data", async () => {
     const gateWayRepository = new GateWayRepository();
@@ -90,5 +90,5 @@ describe("GateWay Repository", () => {
     expect(name).toEqual(result.name);
 
     expect(ipV4).toEqual(result.ipV4);
-  }, 9000);
+  });
 });
