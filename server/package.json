@@ -8,7 +8,8 @@
     "develop": "nodemon",
     "eslint": "eslint . --ext .ts",
     "test": "jest",
-    "fixtures": "ts-node ./src/fixture-data.ts"
+    "fixtures": "ts-node ./src/fixture-data.ts",
+    "fixtures-start": "npm run fixtures && npm run start"
   },
   "keywords": [
     "Javascript",
