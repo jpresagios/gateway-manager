@@ -29,7 +29,7 @@ afterEach(async () => await clearDatabase());
 // Finished to in-memory and closed resource
 afterAll(async () => await closeDatabase());
 
-describe("API Testing", () => {
+describe("API Testing Gateway Endpoints", () => {
   test("Endpoint gateway/all return 0 Gateways when called before inserted Gateways", async () => {
     const result = await request(app.getApp()).get("/gateway/all");
 
@@ -95,6 +95,35 @@ describe("API Testing", () => {
     const { errors } = JSON.parse(result.text);
 
     expect(errors["serialNumber"]).toEqual("serialNumber must be unique");
+  });
+
+  test("Endpoint gateway/detail/:id return detail for GateWay and status code === 200", async () => {
+    const gateWay = {
+      serialNumber: "AVGG1",
+      name: "GateWay 1",
+      ipV4: "2.89.31.4",
+    };
+
+    let result = await request(app.getApp())
+      .post("/gateway/insert")
+      .send(gateWay);
+
+    expect(result.status).toBe(200);
+
+    const { success, data } = JSON.parse(result.text);
+    expect(success).toBeTruthy();
+
+    result = await request(app.getApp()).get(`/gateway/detail/${data._id}`);
+
+    expect(result.status).toBe(200);
+
+    const {
+      data: { name, ipV4, serialNumber },
+    } = JSON.parse(result.text);
+
+    expect(name).toEqual(gateWay.name);
+    expect(ipV4).toEqual(gateWay.ipV4);
+    expect(serialNumber).toEqual(gateWay.serialNumber);
   });
 
   test("Endpoint gateway/all returned correct status code === 2000", async () => {
