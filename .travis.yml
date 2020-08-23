@@ -7,7 +7,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t juniorpazformoso/gateway-server -f ./server/Dockerfile ./server
+  - docker build -t juniorpazformoso/gateway-server:1.0 -f ./server/Dockerfile ./server
 
 script:
   - docker run -e CI=true juniorpazformoso/gateway-server npm run test
@@ -16,4 +16,4 @@ after_success:
   - docker build -t juniorpazformoso/client ./client
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" — password-stdin
   - docker push juniorpazformoso/client
-  - docker push juniorpazformoso/gateway-server
+  - docker push juniorpazformoso/gateway-server:1.0
