@@ -18,11 +18,10 @@ export default class DeviceRepository implements IDeviceRepository {
     const device: IDevice = new Device(deviceData);
     const resultDeviceDB = await device.save();
 
-    const gateWay = await GateWay.findById(idGateWay);
-    gateWay.devices.push(resultDeviceDB);
-    gateWay.save();
-
-    return resultDeviceDB;
+    return await GateWay.findOneAndUpdate(
+      { _id: idGateWay },
+      { $push: { devices: resultDeviceDB } }
+    );
   }
 
   /*
