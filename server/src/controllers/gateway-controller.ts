@@ -62,7 +62,7 @@ export default class GateWayController implements IControllerBase {
           success: true,
         });
       } else {
-        logger.error("Error executing insert for gateWay", errors);
+        logger.info("Error executing insert for gateWay", errors);
 
         return res.status(400).json({
           errors,
@@ -70,7 +70,7 @@ export default class GateWayController implements IControllerBase {
         });
       }
     } catch (error) {
-      logger.error("Fail to insert GateWay  ", error);
+      logger.info("Fail to insert GateWay  ", error);
 
       return res.status(500).json({
         status: 500,
