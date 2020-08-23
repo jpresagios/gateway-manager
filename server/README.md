@@ -38,6 +38,18 @@ How to run tests
 npm run test
 ```
 
+How to load some data on database
+
+```
+npm run fixtures
+```
+
+How to load content on database fixtures and start app
+
+```
+npm run fixtures-start
+```
+
 How review API contracts documentation using OpenApi
 
 ```
