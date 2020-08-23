@@ -13,7 +13,7 @@ script:
   - docker run -e CI=true juniorpazformoso/gateway-server:1.0 npm run test
 
 after_success:
-  - docker build -t juniorpazformoso/client ./client
+  - docker build -t juniorpazformoso/gateway-client:1.0 -f ./client/Dockerfile ./client
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" — password-stdin
-  - docker push juniorpazformoso/client
+  - docker push juniorpazformoso/gateway-client:1.0
   - docker push juniorpazformoso/gateway-server:1.0
