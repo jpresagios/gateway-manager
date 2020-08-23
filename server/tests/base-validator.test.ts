@@ -3,7 +3,7 @@ import ipV4InvalidAddress from "./fake-data/invalidIPV4-address";
 import ipV4validAddress from "./fake-data/validIPV4-address";
 const validator = new Validator();
 
-describe("Device Validator", () => {
+describe("Base Validator (Common Validations)", () => {
   test("Validate Method isIpV4 returned true for valid IpV4 address", async () => {
     for (let i = 0; i < ipV4validAddress.length; i++) {
       const address = ipV4validAddress[i];
