@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GateWayList component tests Snapshot for GateWayList pass successfully 1`] = `
+<DocumentFragment>
+  <a
+    class="btn btn-primary mb-3"
+    href="/gateway/add"
+  >
+    Create GateWay
+  </a>
+</DocumentFragment>
+`;
