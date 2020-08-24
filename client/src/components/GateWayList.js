@@ -30,7 +30,6 @@ class GateWayList extends Component {
   render() {
     const { gateways, collapse } = this.state;
 
-    console.log(gateways);
     return (
       <>
         <Link to="/gateway/add" className="btn btn-primary mb-3">
