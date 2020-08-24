@@ -18,7 +18,6 @@ function NavBar() {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Gateway manager</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
