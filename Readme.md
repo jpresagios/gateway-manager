@@ -30,6 +30,15 @@ https://docs.docker.com/compose/install/
 docker-compose up --build
 
 Navigate to http://localhost:3001
+
+Navigate to http://localhost:3000/api-docs
+
 ```
 
+Demo UI (http://localhost:3001)
+
 ![](demo.gif)
+
+API Contract (http://localhost:3000/api-docs)
+
+![](apidocs.gif)

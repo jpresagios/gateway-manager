@@ -9,7 +9,7 @@
   "basePath": "/",
   "tryItOut": false,
   "paths": {
-    "/gatewall/all": {
+    "/gateway/all": {
       "get": {
         "summary": "Retrieve all Gateway",
 
@@ -29,7 +29,7 @@
                   "name": {
                     "type": "string"
                   },
-                  "IpV4": {
+                  "ipV4": {
                     "type": "string"
                   },
                   "devices": {
@@ -51,7 +51,7 @@
           {
             "in": "body",
             "schema": {
-              "required": ["serialNumber", "name", "IpV4"],
+              "required": ["serialNumber", "name", "ipV4"],
 
               "properties": {
                 "serialNumber": {
@@ -69,13 +69,26 @@
         ],
         "responses": {
           "200": {
-            "description": "success contain result of the operation. data contain GateWay data inserted in case sucessfully operation",
+            "description": "When GateWay is inserted API return status = 200, success = true and data = GateWay data",
             "schema": {
               "properties": {
                 "success": {
                   "type": "boolean"
                 },
                 "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "In Case of some problem API return status = 400, success = false  and errors contain GateWay data error messages",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "errors": {
                   "type": "object"
                 }
               }
@@ -98,7 +111,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Return the detail gateway",
+            "description": "Return the detail gateway. devices expand to a list with all device data",
             "schema": {
               "properties": {
                 "serialNumber": {
@@ -107,7 +120,7 @@
                 "name": {
                   "type": "string"
                 },
-                "IpV4": {
+                "ipV4": {
                   "type": "string"
                 },
                 "devices": {
@@ -136,8 +149,14 @@
                 "idGateWay": {
                   "type": "string"
                 },
-                "device": {
-                  "type": "object"
+                "uid": {
+                  "type": "number"
+                },
+                "vendor": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
                 }
               }
             }
@@ -145,13 +164,26 @@
         ],
         "responses": {
           "200": {
-            "description": "success contain result of the operation, true in case successfully operation, false otherwise. data contain Device inserted in case sucessfully operation",
+            "description": "When device is inserted API return status = 200, success = true and data  = Device data",
             "schema": {
               "properties": {
                 "success": {
                   "type": "boolean"
                 },
                 "data": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "In Case of some problem with insertion  API return status = 400, success = false and errors contain errors validations",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "errors": {
                   "type": "object"
                 }
               }
