@@ -11,7 +11,7 @@ const DeviceList = (props) => {
       {devices &&
         devices.map((device) => {
           return (
-            <ListGroupItem>
+            <ListGroupItem key={device._id}>
               <DeviceItem
                 showDelete={showDelete}
                 device={device}
