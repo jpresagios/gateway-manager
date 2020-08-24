@@ -1,4 +1,4 @@
-# Gateway Manager Service API
+# Gateway React UI
 
 To have installed:
 
@@ -26,10 +26,8 @@ How to run app
 npm run start
 ```
 
-How review API contracts documentation using OpenApi
+How to run tests
 
 ```
-npm run start
-
-Navigate to /api-docs
+npm run test
 ```
